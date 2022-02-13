@@ -35,6 +35,6 @@ public class Deal {
     }
 
     public boolean isValidType() {
-        return  type = " buy" || type = "sale";
+        return  type == " buy" || type == "sale";
     }
 }
