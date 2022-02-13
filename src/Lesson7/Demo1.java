@@ -6,8 +6,7 @@ import java.util.Date;
 
 public class Demo1 {
     public Deal createDeal() {
-
-        return new Deal(100, new Date(), false, null, "Dnepr", "Ukraine", "Buy");
+ return new Deal(100, new Date(), false, null, "Dnepr", "Ukraine", "Buy");
     }
 
     public Deal createDealAndCallMethods() {
