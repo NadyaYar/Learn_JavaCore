@@ -1,6 +1,6 @@
 package Lesson6;
 
-public class demo {
+public class Demo {
     public static void main(String[] args) {
         Car car = new Car(10000, 2015, "A");
         System.out.println(car.color);
