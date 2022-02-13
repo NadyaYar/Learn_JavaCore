@@ -1,6 +1,6 @@
 package Lesson6;
 
-import java.sql.Date;
+import  java.util.Date;
 
 public class Deal {
     long id;
