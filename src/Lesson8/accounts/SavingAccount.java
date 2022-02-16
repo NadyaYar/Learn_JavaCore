@@ -10,10 +10,11 @@ public class SavingAccount extends Account {
     }
 
 @Override // перезапис
-    void changeOwnerName(String newOwnerName){
-        if (newOwnerName == "Jack" || newOwnerName == "Ann")
+    void changeOwnerName(String newOwnerName) {
+        if (newOwnerName == "Jack" || newOwnerName == "Ann") {
             ownerName = newOwnerName;
-        else
+        } else {
             System.out.println("sorry..");
+        }
     }
 }
