@@ -10,12 +10,12 @@ public class Arithmetic {
     public static boolean check() {
         int max = array[0];
         for (int j : array)
-            if (j < max) {
+            if (j > max) {
                 max = j;
             }
         int min = array[0];
         for (int j : array)
-            if (j > min) {
+            if (j < min) {
                 min = j;
             }
         int sum = max + min;
