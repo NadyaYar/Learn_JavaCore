@@ -10,7 +10,7 @@ public class Adder extends Arithmetic {
         this.b = b;
     }
 
-    static int add(int a, int b) {
-        return a + b;
+    static long add(int a, int b) {
+        return (long) a + (long) b;
     }
 }
