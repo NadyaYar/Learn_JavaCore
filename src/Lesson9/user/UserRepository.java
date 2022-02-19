@@ -29,7 +29,7 @@ public class UserRepository {
         return namesArray;
     }
 
-    public long[] getUserId() {
+    public long[] getUserIds() {
         long[] idArray = new long[countUser()];
         int index = 0;
         for (User user : users) {
@@ -42,13 +42,14 @@ public class UserRepository {
     }
 
     public String getUserNameByUserIds(long id) {
-        if (id == getUserId().length) {
-            return getUserNames().toString();
-        }
+        for (User user : users)
+            if (id == user.getId()) {
+                return user.getName();
+            }
         return null;
     }
 
-    public String getUsetByName(String name) {
+    public String getUserByName(String name) {
         for (User user : users) {
             if (name == user.getName()) {
                 return name;
@@ -95,13 +96,14 @@ public class UserRepository {
         return null;
     }
 
-    public void delete(long id) {
+    public User[] delete(long id) {
         int nElement = users.length;
         for (int i = 0; i < nElement; i++) {
             if (id == users[i].getId()) {
                 users[i] = null;
             }
         }
+        return users;
     }
 }
 

@@ -10,7 +10,7 @@ public class Demo {
         //  company.name = "IBM";
         Cheker cheker = new Cheker();
         //  cheker.checkCompanyname(company.name);
-        //   System.out.println(cheker.companyNamesValidayCount);
+        //  System.out.println(cheker.companyNamesValidayCount);
         System.out.println(cheker.checkCompanyname("Google"));
         company.getName();
 

@@ -24,6 +24,15 @@ public class User {
         this.sessionId = sessionId;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", sessionId='" + sessionId + '\'' +
+                '}';
+    }
+
     public long getId() {
         return id;
     }
