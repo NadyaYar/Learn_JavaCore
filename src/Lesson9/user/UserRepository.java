@@ -43,22 +43,17 @@ public class UserRepository {
 
     public String getUserNameByUserIds(long id) {
         for (User user : users) {
-            if (user == null) {
-                return null;
-            }
-            if (id == user.getId()) {
+            if ((user != null) && (id == user.getId())) {
                 return user.getName();
             }
+
         }
         return null;
     }
 
     public String getUserByName(String name) {
         for (User user : users) {
-            if (user == null) {
-                return null;
-            }
-            if (name == user.getName()) {
+            if ((user != null) && (name == user.getName())) {
                 return name;
             }
         }
@@ -67,10 +62,7 @@ public class UserRepository {
 
     public User findById(long id) {
         for (User user : users) {
-            if (user == null) {
-                return null;
-            }
-            if (id == user.getId()) {
+            if ((user != null) && (id == user.getId())) {
                 return user;
             }
         }
@@ -79,10 +71,7 @@ public class UserRepository {
 
     public User getUserBySessionId(String sessionId) {
         for (User user : users) {
-            if (user == null) {
-                return null;
-            }
-            if (sessionId == user.getSessionId()) {
+            if ((user != null) && (sessionId == user.getSessionId())) {
                 return user;
             }
         }
@@ -101,10 +90,7 @@ public class UserRepository {
 
     public User update(User user) {
         for (int i = 0; i < users.length; i++) {
-            if (user == null) {
-                return null;
-            }
-            if (users[i] == findById(user.getId())) {
+            if (user != null && users[i] == findById(user.getId())){
                 users[i] = user;
                 return users[i];
             }
@@ -115,10 +101,7 @@ public class UserRepository {
     public User[] delete(long id) {
         int nElement = users.length;
         for (int i = 0; i < nElement; i++) {
-            if (users == null) {
-                return null;
-            }
-            if (id == users[i].getId()) {
+            if ((users != null) && (id == users[i].getId())){
                 users[i] = null;
             }
         }

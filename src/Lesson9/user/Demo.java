@@ -8,9 +8,9 @@ public class Demo {
         User user1 = new User(2, "Den", "a1");
         User user2 = new User(3, "ann", "a2");
         User user3 = new User(4, "Alla", "a3");
-        User[] users = {user, user1, user2};
+        User[] users = {null, user2, user1};
         UserRepository userRepository = new UserRepository(users);
-        System.out.println(userRepository.getUserByName("Kate"));
+        System.out.println(userRepository.getUserByName("ann"));
         System.out.println(userRepository.getUserNameByUserIds(2));
         System.out.println(Arrays.toString(userRepository.getUserNames()));
         System.out.println(Arrays.toString(userRepository.getUserIds()));
