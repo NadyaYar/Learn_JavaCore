@@ -43,37 +43,32 @@ public class UserRepository {
 
     public String getUserNameByUserIds(long id) {
         for (User user : users) {
-            if ((user != null) && (id == user.getId())) {
+            if ((user != null) && (id == user.getId()))
                 return user.getName();
-            }
-
         }
         return null;
     }
 
     public String getUserByName(String name) {
         for (User user : users) {
-            if ((user != null) && (name == user.getName())) {
+            if ((user != null) && (name == user.getName()))
                 return name;
-            }
         }
         return null;
     }
 
     public User findById(long id) {
         for (User user : users) {
-            if ((user != null) && (id == user.getId())) {
+            if ((user != null) && (id == user.getId()))
                 return user;
-            }
         }
         return null;
     }
 
     public User getUserBySessionId(String sessionId) {
         for (User user : users) {
-            if ((user != null) && (sessionId == user.getSessionId())) {
+            if ((user != null) && (sessionId == user.getSessionId()))
                 return user;
-            }
         }
         return null;
     }
@@ -90,10 +85,9 @@ public class UserRepository {
 
     public User update(User user) {
         for (int i = 0; i < users.length; i++) {
-            if (user != null && users[i] == findById(user.getId())){
+            if (user != null && users[i] == findById(user.getId()))
                 users[i] = user;
                 return users[i];
-            }
         }
         return null;
     }
@@ -101,9 +95,8 @@ public class UserRepository {
     public User[] delete(long id) {
         int nElement = users.length;
         for (int i = 0; i < nElement; i++) {
-            if ((users != null) && (id == users[i].getId())){
+            if ((users != null) && (id == users[i].getId()))
                 users[i] = null;
-            }
         }
         return users;
     }
