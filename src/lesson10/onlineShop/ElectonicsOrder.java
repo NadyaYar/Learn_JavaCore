@@ -5,14 +5,6 @@ import java.util.Date;
 public class ElectonicsOrder extends Order {
     private int guaranteeMonths;
 
-    public int getGuaranteeMonths() {
-        return guaranteeMonths;
-    }
-
-    public void setGuaranteeMonths(int guaranteeMonths) {
-        this.guaranteeMonths = guaranteeMonths;
-    }
-
     public ElectonicsOrder(String itemName,
                            Date dateCreated,
                            String shipFromCity,
@@ -26,6 +18,14 @@ public class ElectonicsOrder extends Order {
                 shipToCity,
                 basePrice,
                 customerOwned);
+        this.guaranteeMonths = guaranteeMonths;
+    }
+
+    public int getGuaranteeMonths() {
+        return guaranteeMonths;
+    }
+
+    public void setGuaranteeMonths(int guaranteeMonths) {
         this.guaranteeMonths = guaranteeMonths;
     }
 

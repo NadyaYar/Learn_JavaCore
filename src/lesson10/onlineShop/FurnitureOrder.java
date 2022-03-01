@@ -5,15 +5,6 @@ import java.util.Date;
 public class FurnitureOrder extends Order {
     private String furnitureCode;
 
-
-    public String getFurnitureCode() {
-        return furnitureCode;
-    }
-
-    public void setFurnitureCode(String furnitureCode) {
-        this.furnitureCode = furnitureCode;
-    }
-
     public FurnitureOrder(String itemName,
                           Date dateCreated,
                           String shipFromCity,
@@ -27,6 +18,14 @@ public class FurnitureOrder extends Order {
                 shipToCity,
                 basePrice,
                 customerOwned);
+        this.furnitureCode = furnitureCode;
+    }
+
+    public String getFurnitureCode() {
+        return furnitureCode;
+    }
+
+    public void setFurnitureCode(String furnitureCode) {
         this.furnitureCode = furnitureCode;
     }
 
