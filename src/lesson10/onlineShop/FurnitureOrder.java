@@ -4,12 +4,30 @@ import java.util.Date;
 
 public class FurnitureOrder extends Order {
     private String furnitureCode;
-    private Customer customer = new Customer();
 
-    public FurnitureOrder(String itemName, Date dateCreated, String shipFromCity,
-                          String shipToCity, int basePrice, Customer customerOwned, String furnitureCode) {
-        super(itemName, dateCreated, shipFromCity,
-                shipToCity, basePrice, customerOwned);
+
+    public String getFurnitureCode() {
+        return furnitureCode;
+    }
+
+    public void setFurnitureCode(String furnitureCode) {
+        this.furnitureCode = furnitureCode;
+    }
+
+    public FurnitureOrder(String itemName,
+                          Date dateCreated,
+                          String shipFromCity,
+                          String shipToCity,
+                          int basePrice,
+                          Customer customerOwned,
+                          String furnitureCode) {
+        super(itemName,
+                dateCreated,
+                shipFromCity,
+                shipToCity,
+                basePrice,
+                customerOwned);
+
     }
 
     @Override
@@ -17,7 +35,7 @@ public class FurnitureOrder extends Order {
         if ((getShipFromCity() == "Kyiv"
                 || getShipFromCity() == "Lviv")
                 && (getBasePrice() > 500)
-                && (customer.getName() != "Test")) {
+                && (getCustomerOwned().getName() != "Test")) {
             setDateConfirmed(new Date());
             return true;
         }

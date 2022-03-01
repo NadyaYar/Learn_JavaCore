@@ -5,20 +5,39 @@ import java.util.Date;
 public class ElectonicsOrder extends Order {
     private int guaranteeMonths;
 
-    private Customer customer = new Customer();
+    public int getGuaranteeMonths() {
+        return guaranteeMonths;
+    }
 
-    public ElectonicsOrder(String itemName, Date dateCreated, String shipFromCity,
-                           String shipToCity, int basePrice, Customer customerOwned, int guaranteeMonths) {
-        super(itemName, dateCreated, shipFromCity, shipToCity, basePrice, customerOwned);
+    public void setGuaranteeMonths(int guaranteeMonths) {
+        this.guaranteeMonths = guaranteeMonths;
+    }
+
+    public ElectonicsOrder(String itemName,
+                           Date dateCreated,
+                           String shipFromCity,
+                           String shipToCity,
+                           int basePrice,
+                           Customer customerOwned,
+                           int guaranteeMonths) {
+        super(itemName,
+                dateCreated,
+                shipFromCity,
+                shipToCity,
+                basePrice,
+                customerOwned);
     }
 
     @Override
     boolean validate() {
 
-        if ((getShipFromCity() == "Odessa" || getShipFromCity() == "Kharkiv" || getShipFromCity() == "Kyiv" || getShipFromCity() == "Dnipro")
+        if ((getShipFromCity() == "Odessa"
+                || getShipFromCity() == "Kharkiv"
+                || getShipFromCity() == "Kyiv"
+                || getShipFromCity() == "Dnipro")
                 && (getShipToCity() == "Kyiv")
                 && (getBasePrice() > 100)
-                && (customer.getGender() != "male")) {
+                && (getCustomerOwned().getGender() != "male")) {
             setDateConfirmed(new Date());
             return true;
         } else {
