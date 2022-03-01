@@ -97,6 +97,7 @@ public class UserRepository {
         for (int i = 0; i < nElement; i++) {
             if ((users != null) && (id == users[i].getId()))
                 users[i] = null;
+
         }
         return users;
     }
