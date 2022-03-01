@@ -18,7 +18,7 @@ public class FurnitureOrder extends Order {
                           Date dateCreated,
                           String shipFromCity,
                           String shipToCity,
-                          int basePrice,
+                          double basePrice,
                           Customer customerOwned,
                           String furnitureCode) {
         super(itemName,
@@ -27,7 +27,7 @@ public class FurnitureOrder extends Order {
                 shipToCity,
                 basePrice,
                 customerOwned);
-
+        this.furnitureCode = furnitureCode;
     }
 
     @Override

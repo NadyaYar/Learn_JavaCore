@@ -26,6 +26,7 @@ public class ElectonicsOrder extends Order {
                 shipToCity,
                 basePrice,
                 customerOwned);
+        this.guaranteeMonths = guaranteeMonths;
     }
 
     @Override
