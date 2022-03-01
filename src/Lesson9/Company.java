@@ -6,11 +6,11 @@ public class Company {
     protected String code;
     public int someField;
 
-    public String getName() { //write
+    public String getName() { //read
         return name;
     }
 
-    public void setName(String name) { // read
+    public void setName(String name) { // write
         this.name = name;
     }
 
