@@ -1,9 +1,9 @@
 package lesson10.onlineShop;
 
 public class Customer {
-    String name;
-    String city;
-    String gender;
+    private String name;
+    private String city;
+    private String gender;
 
     public String getName() {
         return name;

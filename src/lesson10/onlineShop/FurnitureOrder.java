@@ -4,10 +4,10 @@ import java.util.Date;
 
 public class FurnitureOrder extends Order {
     private String furnitureCode;
-    Customer customer = new Customer();
+    private Customer customer = new Customer();
 
     public FurnitureOrder(String itemName, Date dateCreated, String shipFromCity,
-                          String shipToCity, int basePrice, Customer customerOwned) {
+                          String shipToCity, int basePrice, Customer customerOwned, String furnitureCode) {
         super(itemName, dateCreated, shipFromCity,
                 shipToCity, basePrice, customerOwned);
     }

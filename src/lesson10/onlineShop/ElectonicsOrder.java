@@ -3,11 +3,12 @@ package lesson10.onlineShop;
 import java.util.Date;
 
 public class ElectonicsOrder extends Order {
-    int guaranteeMonths;
-    Customer customer = new Customer();
+    private int guaranteeMonths;
+
+    private Customer customer = new Customer();
 
     public ElectonicsOrder(String itemName, Date dateCreated, String shipFromCity,
-                           String shipToCity, int basePrice, Customer customerOwned) {
+                           String shipToCity, int basePrice, Customer customerOwned, int guaranteeMonths) {
         super(itemName, dateCreated, shipFromCity, shipToCity, basePrice, customerOwned);
     }
 

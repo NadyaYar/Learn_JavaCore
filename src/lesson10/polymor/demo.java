@@ -1,7 +1,6 @@
 package lesson10.polymor;
 
 public class demo {
-
     public static void main(String[] args) {
         human human = new human("test");
         run(human);

@@ -3,23 +3,15 @@ package lesson10.onlineShop;
 import java.util.Date;
 
 public abstract class Order {
-    String itemName;
-    Date dateCreated;
-    Date dateConfirmed;
-    Date dateShipped;
-    String shipFromCity;
-    String shipToCity;
-    double basePrice;
-    double totalPrice;
-    Customer customerOwned;
-
-    public double getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(double totalPrice) {
-        this.totalPrice = totalPrice;
-    }
+    private String itemName;
+    private Date dateCreated;
+    private Date dateConfirmed;
+    private Date dateShipped;
+    private String shipFromCity;
+    private String shipToCity;
+    private double basePrice;
+    private double totalPrice;
+    private Customer customerOwned;
 
     public Order(String itemName, Date dateCreated, String shipFromCity, String shipToCity, double basePrice, Customer customerOwned) {
         this.itemName = itemName;
@@ -28,6 +20,14 @@ public abstract class Order {
         this.shipToCity = shipToCity;
         this.basePrice = basePrice;
         this.customerOwned = customerOwned;
+    }
+
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
     abstract boolean validate();
