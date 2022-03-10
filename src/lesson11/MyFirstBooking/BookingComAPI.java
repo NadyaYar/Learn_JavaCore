@@ -1,16 +1,7 @@
 package lesson11.MyFirstBooking;
 
-import java.util.Arrays;
-
 public class BookingComAPI implements API {
     private Room[] rooms;
-
-    @Override
-    public String toString() {
-        return "BookingComAPI{" +
-                "rooms=" + Arrays.toString(rooms) +
-                '}';
-    }
 
     public BookingComAPI(Room[] rooms) {
         this.rooms = rooms;
@@ -18,7 +9,7 @@ public class BookingComAPI implements API {
 
     @Override
     public Room[] findRooms(int price, int persons, String city, String hotel) {
-        Room[] rooms = new Room[resultCount(price, persons, city, hotel)];
+        Room[] result = new Room[resultCount(price, persons, city, hotel)];
         int index = 0;
         for (Room room : rooms) {
             if (room != null

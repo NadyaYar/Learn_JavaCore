@@ -24,6 +24,18 @@ public class Room {
         this.cityName = cityName;
     }
 
+    @Override
+    public String toString() {
+        return "Room{" +
+                "id=" + id +
+                ", price=" + price +
+                ", persons=" + persons +
+                ", dateAvailableFrom=" + dateAvailableFrom +
+                ", HotelName='" + HotelName + '\'' +
+                ", cityName='" + cityName + '\'' +
+                '}';
+    }
+
     public long getId() {
         return id;
     }
