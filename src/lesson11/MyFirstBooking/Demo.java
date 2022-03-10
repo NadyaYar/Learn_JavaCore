@@ -8,6 +8,7 @@ public class Demo {
         Room room = new Room(123, 500, 1, new Date(), "Kyiv", "Kyiv");
         Room room1 = new Room(124, 20000, 30, new Date(), "Dream", "Lviv");
         Room room2 = new Room(125, 2500, 5, new Date(), "Victoria", "Dnipro");
+
         Room[] rooms = {room, room1, room2};
 
         TripAdvisorAPI tripAdvisorAPI = new TripAdvisorAPI(rooms);
@@ -30,7 +31,7 @@ public class Demo {
 
         System.out.println(Arrays.toString(bookingComAPI.findRooms(499, 1, "Kyiv", "Kyiv")));
 
-        System.out.println(Arrays.toString(bookingComAPI.findRooms(3555,88,"Some","Some")));
+        System.out.println(Arrays.toString(bookingComAPI.findRooms(3555, 88, "Some", "Some")));
 
 
     }

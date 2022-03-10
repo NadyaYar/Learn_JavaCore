@@ -21,7 +21,7 @@ public class GoogleAPI implements API {
                 index++;
             }
         }
-        return rooms;
+        return result;
     }
 
     @Override

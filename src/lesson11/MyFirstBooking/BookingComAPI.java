@@ -22,7 +22,7 @@ public class BookingComAPI implements API {
                 index++;
             }
         }
-        return rooms;
+        return result;
     }
 
     @Override

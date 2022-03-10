@@ -22,7 +22,7 @@ public class TripAdvisorAPI implements API {
                 index++;
             }
         }
-        return rooms;
+        return result;
     }
 
     @Override
