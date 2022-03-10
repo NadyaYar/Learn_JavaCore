@@ -17,7 +17,7 @@ public class Demo {
 
         BookingComAPI bookingComAPI = new BookingComAPI(rooms);
 
-        API [] apis = {bookingComAPI,tripAdvisorAPI,googleAPI};
+        API[] apis = {bookingComAPI, tripAdvisorAPI, googleAPI, bookingComAPI};
 
 
         Controller controller = new Controller(apis);
@@ -38,7 +38,11 @@ public class Demo {
 
         System.out.println(Arrays.toString(bookingComAPI.findRooms(3555, 88, "Some", "Some")));
 
-        System.out.println(Arrays.toString(controller.check(googleAPI,tripAdvisorAPI)));
+        System.out.println(Arrays.toString(controller.check(googleAPI, tripAdvisorAPI)));
+
+        System.out.println(controller.cheapestRoom());
+
+        System.out.println(Arrays.toString(controller.requestRooms(5000, 1, "Kyiv", "Kyiv")));
 
 
     }
