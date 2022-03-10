@@ -4,37 +4,37 @@ public class Controller {
     private API[] apis;
 
     public Controller(API[] apis) {
-        this.apis = apis;
+       this.apis = apis;
     }
 
     public Room[] requestRooms(int price, int persons, String city, String hotel) {
-        Room[] rooms = new Room[countResult(price, persons, city, hotel)];
+        Room[] result = new Room[countResult(price, persons, city, hotel)];
         int index = 0;
         for (API api : apis) {
             if (api == null) continue;
 
             for (Room room1 : api.findRooms(price, persons, city, hotel)) {
-                rooms[index] = room1;
+                result[index] = room1;
                 index++;
             }
         }
-        return rooms;
+        return result;
     }
 
     public Room[] check(API api, API api2) {
         if (api == null || api2 == null) return null;
-        Room[] rooms = new Room[countRooms(api, api2)];
+        Room[] result1 = new Room[countRooms(api, api2)];
         int index = 0;
         for (Room room : api.getAl()) {
             if (room == null) continue;
 
             for (Room room1 : api2.getAl()) {
                 if (room.getId() == room1.getId()) {
-                    rooms[index] = room;
+                    result1[index] = room;
                 }
             }
         }
-        return rooms;
+        return result1;
     }
 
     public Room cheapestRoom() {

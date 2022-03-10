@@ -18,7 +18,7 @@ public class BookingComAPI implements API {
                     && hotel == room.getHotelName()
                     && price <= price + 100
                     && price >= Math.max(price - 100, 0)) {
-                rooms[index] = room;
+                result[index] = room;
                 index++;
             }
         }

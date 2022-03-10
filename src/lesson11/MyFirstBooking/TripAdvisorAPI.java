@@ -18,7 +18,7 @@ public class TripAdvisorAPI implements API {
                     && city == room.getCityName()
                     && hotel == room.getHotelName()
                     && price == room.getPrice()) {
-                rooms[index] = room;
+                result[index] = room;
                 index++;
             }
         }
