@@ -44,6 +44,7 @@ public class Demo {
 
         System.out.println(Arrays.toString(controller.requestRooms(5000, 1, "Kyiv", "Kyiv")));
 
+        System.out.println();
 
     }
 }
