@@ -10,7 +10,8 @@ public class Demo {
         Room room2 = new Room(125, 2500, 5, new Date(), "Victoria", "Dnipro");
         Room room3 = new Room(126, 200, 4, new Date(), "Some", "Kyiv");
 
-        Room[] rooms = {room0, room1, room2, room3};
+
+        Room[] rooms = {room0, room1, room2, null};
 
         TripAdvisorAPI tripAdvisorAPI = new TripAdvisorAPI(rooms);
 

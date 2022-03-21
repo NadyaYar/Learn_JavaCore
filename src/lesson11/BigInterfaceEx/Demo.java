@@ -7,7 +7,7 @@ public class Demo {
         File file3 = new File("video","C:/user/home","txt",11);
         File file4 = new File("test","C:/user/home","txt",11);
         File file5 = new File("myhome","C:/user/home","jpg",110);
-       File[] files = new File[]{file1,file2,file3,file4,file5};
+       File[] files = new File[]{file1,file2,file3,file4,null};
         Storage storage = new Storage(files);
         FileReader fileReader = new FileReader();
         SimpleReader simpleReader = new SimpleReader();

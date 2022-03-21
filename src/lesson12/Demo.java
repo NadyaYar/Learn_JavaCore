@@ -2,9 +2,9 @@ package lesson12;
 
 public class Demo {
     public static void main(String[] args) {
-        Bank usbBank = new UsbBank(123, "Ukraine", Currency.EUR, 100, 1400, 1230000);
+        Bank usbBank = new USBank(123, "Ukraine", Currency.EUR, 100, 1400, 1230000);
 
-        Bank eubank = new UsbBank(1,"German",Currency.USD,300,2000,5000000);
+        Bank eubank = new USBank(1,"German",Currency.USD,300,2000,5000000);
 
         Bank chinaBank = new ChinaBank(2,"Canada",Currency.USD,300,2000,1000000000);
 

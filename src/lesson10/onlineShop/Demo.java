@@ -11,6 +11,7 @@ public class Demo {
         FurnitureOrder furnitureOrder = new FurnitureOrder("Phone", new Date(),
                 "Kyiv", "Kyiv", 1000, customer, "something");
 
+
         System.out.println(electonicsOrder.validate());
         System.out.println(furnitureOrder.validate());
 
