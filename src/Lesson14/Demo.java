@@ -12,6 +12,7 @@ public class Demo {
         objectTest = new Object();
 
         System.out.println(objectTest.toString());
+
         System.out.println(objectTest.getClass().getName());
 
     }
