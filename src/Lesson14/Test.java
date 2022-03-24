@@ -25,6 +25,7 @@ public class Test implements Cloneable {
     public static void main(String[] args)  throws Exception{
 
         Test test = new Test(100, "name");
+
         System.out.println(test);
         System.out.println(test.hashCode());
         Test test1 = (Test) test.clone();
