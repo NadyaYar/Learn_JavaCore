@@ -14,8 +14,7 @@ public class TripAdvisorAPI implements API {
         for (Room room : rooms) {
             if (room != null
                     && room.getPersons() <= persons + 1
-                    && room.getPersons() >= persons - 1
-                    && persons != 0
+                    && room.getPersons() >= Math.max(persons - 1, 1)
                     && room.getCityName().equals(city)
                     && room.getHotelName().equals(hotel)
                     && price == room.getPrice()) {
