@@ -31,6 +31,7 @@ public class Controller {
             for (Room room1 : api2.getAl()) {
                 if (room.getId() == room1.getId()) {
                     result1[index] = room;
+                    index++;
                 }
             }
         }

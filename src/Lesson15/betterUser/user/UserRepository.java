@@ -41,7 +41,7 @@ public class UserRepository {
         return idArray;
     }
 
-     public String getUserNameByUserIds(long id) {
+    public String getUserNameByUserIds(long id) {
         for (User user : users) {
             if ((user != null) && (user.getId() == id))
                 return user.getName();
@@ -74,12 +74,14 @@ public class UserRepository {
     }
 
     public Object save(User user1) {
-        for (int i = 0; i < users.length; i++) {
-            if (users[i] == null) {
-                users[i] = user1;
-                return users[i];
+        if (user1 != null
+                && !user1.equals(findById(user1.getId())))
+            for (int i = 0; i < users.length; i++) {
+                if (users[i] == null) {
+                    users[i] = user1;
+                    return users[i];
+                }
             }
-        }
         return null;
     }
 
@@ -87,7 +89,7 @@ public class UserRepository {
         for (int i = 0; i < users.length; i++) {
             if (user != null && users[i] == findById(user.getId()))
                 users[i] = user;
-                return users[i];
+            return users[i];
         }
         return null;
     }

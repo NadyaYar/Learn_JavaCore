@@ -16,8 +16,8 @@ public class BookingComAPI implements API {
                     && persons == room.getPersons()
                     && room.getCityName().equals(city)
                     && room.getHotelName().equals(hotel)
-                    && price <= price + 100
-                    && price >= Math.max(price - 100, 0)) {
+                    && room.getPrice() <= price + 100
+                    && room.getPrice() >= Math.max(price - 100, 0)) {
                 result[index] = room;
                 index++;
             }
@@ -37,8 +37,8 @@ public class BookingComAPI implements API {
                     && persons == room.getPersons()
                     && room.getCityName().equals(city)
                     && room.getHotelName().equals(hotel)
-                    && price <= price + 100
-                    && price >= Math.max(price - 100, 0)) {
+                    && room.getPrice() <= price + 100
+                    && room.getPrice() >= Math.max(price - 100, 0)) {
                 count++;
             }
         }

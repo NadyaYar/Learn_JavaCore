@@ -74,7 +74,11 @@ public class Room {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Room room = (Room) o;
-        return id == room.id && price == room.price && persons == room.persons && HotelName.equals(room.HotelName) && cityName.equals(room.cityName);
+        return id == room.id
+                && price == room.price
+                && persons == room.persons
+                && HotelName.equals(room.HotelName)
+                && cityName.equals(room.cityName);
     }
 
     @Override
