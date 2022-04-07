@@ -14,32 +14,37 @@ public class Demo {
 
         User user2 = new User(110,"Nadya",20000,58,"Google",5000,eubank);
 
+        User user3 = new User(777,"Natalya",5000,50,"Alis",500,usbBank);
+
 
 
         BankSystem bankSystem = new UkraineBankSystem();
 
-        bankSystem.withDraw(user1, 100);
-        System.out.println(user1.getBalance());
-
-        bankSystem.fund(user1, 120);
-        System.out.println(user1.getBalance());
-
-        bankSystem.transferMoney(user, user1, 10);
-        System.out.println(user.getBalance());
-        System.out.println(user1.getBalance());
-
-        bankSystem.paySalary(user1);
-        System.out.println(user1.getBalance());
-
-        bankSystem.withDraw(null, 12);
-        System.out.println(user.getBalance());
-
-        bankSystem.fund(null, 100);
-        System.out.println(user.getBalance());
-
-        bankSystem.transferMoney(user, user1, 100);
-        System.out.println(user.getBalance());
-        System.out.println(user1.getBalance());
+//        bankSystem.withDraw(user1, 100);
+//        System.out.println(user1.getBalance());
+//
+//        bankSystem.fund(user1, 120);
+//        System.out.println(user1.getBalance());
+//
+//        bankSystem.transferMoney(user, user1, 10);
+//        System.out.println(user.getBalance());
+//        System.out.println(user1.getBalance());
+//
+//        bankSystem.paySalary(user1);
+//        System.out.println(user1.getBalance());
+//
+//        bankSystem.withDraw(null, 12);
+//        System.out.println(user.getBalance());
+//
+//        bankSystem.fund(null, 100);
+//        System.out.println(user.getBalance());
+//
+//        bankSystem.transferMoney(user, user1, 100);
+//        System.out.println(user.getBalance());
+//        System.out.println(user1.getBalance());
+//
+        bankSystem.withDraw(user3,1000);
+        System.out.println(user3.getBalance());
 
 
     }

@@ -73,9 +73,9 @@ public class UserRepository {
         return null;
     }
 
-    public Object save(User user1) {
+    public  Object  save(User user1) {
         if (user1 != null
-                && !user1.equals(findById(user1.getId())))
+                && findById(user1.getId()) != null)
             for (int i = 0; i < users.length; i++) {
                 if (users[i] == null) {
                     users[i] = user1;
@@ -99,7 +99,6 @@ public class UserRepository {
         for (int i = 0; i < nElement; i++) {
             if ((users != null) && (id == users[i].getId()))
                 users[i] = null;
-
         }
         return users;
     }
