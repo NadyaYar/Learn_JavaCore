@@ -13,31 +13,24 @@ public class Demo {
 
         UserRepository userRepository = new UserRepository(users);
 
-//        System.out.println(userRepository.getUserByName("ann"));
-//
-//        System.out.println(userRepository.getUserNameByUserIds(2));
-//
-//        System.out.println(Arrays.toString(userRepository.getUserNames()));
-//
-//        System.out.println(Arrays.toString(userRepository.getUserIds()));
-//
-//        System.out.println(userRepository.findById(1));
-//
-//        System.out.println(userRepository.getUserBySessionId("a0"));
-//
-//        System.out.println(userRepository.save(user3));
-//
-//        System.out.println(userRepository.update(user1));
-//
-//        System.out.println(Arrays.toString(userRepository.delete(1)));
-//
-//        System.out.println(userRepository.getUserNameByUserIds(5));
+        userRepository.delete(3);
+        System.out.println(Arrays.toString(userRepository.getUsers()));
 
-        System.out.println(userRepository.getUserByName("Kate"));
+        userRepository.save(user3);
+        System.out.println(Arrays.toString(userRepository.getUsers()));
 
+        userRepository.save(null);
+        System.out.println(Arrays.toString(userRepository.getUsers()));
 
+        System.out.println(userRepository.getUserByName("Alla"));
 
+        userRepository.update(user1);
+        System.out.println(Arrays.toString(userRepository.getUsers()));
 
+        System.out.println(userRepository.findById(4));
 
+        System.out.println(userRepository.getUserBySessionId("a7"));
+
+        System.out.println(userRepository.getUserNameByUserIds(3));
     }
 }

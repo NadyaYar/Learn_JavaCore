@@ -7,6 +7,10 @@ public class UserRepository {
         this.users = users;
     }
 
+    public User[] getUsers() {
+        return users;
+    }
+
     public int countUser() {
         int countUser = 0;
         for (User user : users) {
@@ -73,34 +77,46 @@ public class UserRepository {
         return null;
     }
 
-    public  Object  save(User user1) {
-        if (user1 != null
-                && findById(user1.getId()) != null)
-            for (int i = 0; i < users.length; i++) {
-                if (users[i] == null) {
-                    users[i] = user1;
-                    return users[i];
-                }
+    public Object save(User user1) {
+        if (user1 == null
+                || findById(user1.getId()) != null
+                || isStorageFull())
+            return null;
+        for (int i = 0; i < users.length; i++) {
+            if (users[i] == null) {
+                users[i] = user1;
+                return users[i];
             }
+        }
         return null;
     }
 
     public User update(User user) {
+        if (user == null
+                || findById(user.getId()) != null) return null;
         for (int i = 0; i < users.length; i++) {
-            if (user != null && users[i] == findById(user.getId()))
-                users[i] = user;
-            return users[i];
+            if (users[i].getId() == user.getId()) {
+                return users[i] = user;
+            }
         }
         return null;
     }
 
-    public User[] delete(long id) {
-        int nElement = users.length;
-        for (int i = 0; i < nElement; i++) {
-            if ((users != null) && (id == users[i].getId()))
+    public void delete(long id) {
+        for (int i = 0; i < users.length; i++) {
+            if ((users[i] != null)
+                    && id == users[i].getId()) {
                 users[i] = null;
+                break;
+            }
         }
-        return users;
+    }
+
+    public boolean isStorageFull() {
+        for (User user : users) {
+            if (user != null) return false;
+        }
+        return true;
     }
 }
 
