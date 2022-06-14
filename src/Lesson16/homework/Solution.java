@@ -1,6 +1,7 @@
 package Lesson16.homework;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class Solution {
     public static void main(String[] args) {
@@ -9,7 +10,8 @@ public class Solution {
         System.out.println(maxWords(test));
         System.out.println(minWords(test));
         System.out.println(mostCountedWord(test));
-
+        System.out.println(countWords("       d         f    "));
+//        System.out.println(countWords("hello, my dear"));
         System.out.println(Arrays.toString(countDuplicates(test, new String[]{"in", "this"})));
 
         System.out.println(validate("http://www.w3schools.com"));
@@ -18,7 +20,13 @@ public class Solution {
     }
 
     public static int countWords(String input) {
-        return input.split(" ").length;
+        int count = 0;
+        for (String string : input.split(" ")) {
+            if (!string.equals("")) {
+                count++;
+            }
+        }
+        return count;
     }
 
     public static String maxWords(String input) {
@@ -83,14 +91,15 @@ public class Solution {
 
 
         if (!domen.endsWith(".com")
-                || !domen.endsWith(".org")
-                || !domen.endsWith(".net")) {
+                && !domen.endsWith(".org")
+                && !domen.endsWith(".net")) {
             return false;
         }
-        String addressAfterDomen = addressWithoutProtocol.replace(domen,"");
+        String addressAfterDomen = addressWithoutProtocol.replace(domen, "");
         for (char symbol : addressAfterDomen.toCharArray()) {
             if (!Character.isLetter(symbol)
-            && !Character.isDigit(symbol)) {
+                    && !Character.isDigit(symbol)
+                    && symbol != '/') {
                 return false;
             }
         }
