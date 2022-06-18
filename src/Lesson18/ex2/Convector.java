@@ -15,7 +15,7 @@ public class Convector {
     public static int StringToInt(String input) {
         try {
             return Integer.parseInt(input);
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
             System.out.println(input + " cant be converted to int");
             return 0;
         }
