@@ -15,12 +15,19 @@ public class Demo {
         File file3 = new File(6, "hes1", "ipg", 12213);
 
         File[] files = {file, file1, file2};
+        File[] files1 = {file1, file2,null};
         Controller controller = new Controller();
+
 
         Storage storage = new Storage(123, files, "something");
 
-        storage.setFiles(files);
+        Storage storage1 = new Storage(123, files1, "something");
+
+
+
+        controller.transferFile(storage,storage1,4);
         System.out.println(Arrays.toString(storage.getFiles()));
+
 
     }
 }

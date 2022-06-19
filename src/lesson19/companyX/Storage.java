@@ -1,5 +1,7 @@
 package lesson19.companyX;
 
+import java.util.Arrays;
+
 public class Storage {
     long id;
     File[] files;
