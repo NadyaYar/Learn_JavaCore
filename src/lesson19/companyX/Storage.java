@@ -9,16 +9,12 @@ public class Storage {
     String storageCountry;
     long storageSize;
 
-
     public Storage(long id, File[] files, String[] formatSupports, String storageCountry, long storageSize) {
         this.id = id;
         this.files = files;
         this.formatSupports = formatSupports;
         this.storageCountry = storageCountry;
         this.storageSize = storageSize;
-    }
-
-    public Storage(int id, File[] files, String something) {
     }
 
     public long getId() {
@@ -33,9 +29,8 @@ public class Storage {
         return files;
     }
 
-    public File[] setFiles(File[] files) {
+    public void setFiles(File[] files) {
         this.files = files;
-        return files;
     }
 
     public String[] getFormatSupports() {

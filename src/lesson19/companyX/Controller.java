@@ -24,17 +24,19 @@ public class Controller {
     }
 
     public void transferFile(Storage storageFrom, Storage storageTo, long id) {
-        File [] files = storageFrom.getFiles();
+        File[] files = storageFrom.getFiles();
         storageFrom.setFiles(files);
-        for (int i = 0; i < files.length; i++){
-            if (files[i].getId() == id){
-                delete(storageFrom,files[i]);
-                put(storageTo,files[i]);
+        for (int i = 0; i < files.length; i++) {
+            if (files[i].getId() == id) {
+                delete(storageFrom, files[i]);
+                put(storageTo, files[i]);
             }
         }
     }
 
     public void transferAll(Storage storageFrom, Storage storageTo) {
+        File[] files = storageFrom.getFiles();
 
-    }
+        }
+
 }

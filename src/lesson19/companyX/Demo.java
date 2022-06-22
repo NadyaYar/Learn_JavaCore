@@ -16,17 +16,19 @@ public class Demo {
 
         File[] files = {file, file1, file2};
         File[] files1 = {file1, file2,null};
+        String [] format = {"jpg","png","img"};
         Controller controller = new Controller();
 
 
-        Storage storage = new Storage(123, files, "something");
+        Storage storage = new Storage(123,files,format,"Uk",45);
 
-        Storage storage1 = new Storage(123, files1, "something");
+        Storage storage1 = new Storage(125,files1,format,"Uk",489);
 
 
 
         controller.transferFile(storage,storage1,4);
         System.out.println(Arrays.toString(storage.getFiles()));
+        System.out.println(Arrays.toString(storage1.getFiles()));
 
 
     }
