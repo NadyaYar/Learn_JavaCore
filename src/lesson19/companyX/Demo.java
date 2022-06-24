@@ -12,10 +12,10 @@ public class Demo {
 
         File file2 = new File(6, "hes", "ipg", 12213);
 
-        File file3 = new File(6, "hes1", "ipg", 12213);
+        File file3 = new File(7, "hes1", "qwey", 12213);
 
-        File[] files = {file, file1, file2};
-        File[] files1 = {file1, file2,null};
+        File[] files = {file, file1, file2,null};
+        File[] files1 = {null, null,file};
         String [] format = {"jpg","png","img"};
         Controller controller = new Controller();
 
@@ -26,9 +26,16 @@ public class Demo {
 
 
 
-        controller.transferFile(storage,storage1,4);
+//        controller.transferFile(storage,storage1,4);
+//        System.out.println(Arrays.toString(storage.getFiles()));
+//        System.out.println(Arrays.toString(storage1.getFiles()));
+
+//        controller.transferAll(storage,storage1);
+//        System.out.println(Arrays.toString(storage.getFiles()));
+//        System.out.println(Arrays.toString(storage1.getFiles()));
+
+        controller.put(storage,file3);
         System.out.println(Arrays.toString(storage.getFiles()));
-        System.out.println(Arrays.toString(storage1.getFiles()));
 
 
     }
