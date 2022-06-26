@@ -3,7 +3,7 @@ package lesson19.companyX;
 import java.util.Arrays;
 
 public class Demo {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
 
         File file = new File(4, "he", "ipg", 1223);
@@ -14,16 +14,15 @@ public class Demo {
 
         File file3 = new File(7, "hes1", "qwey", 12213);
 
-        File[] files = {file, file1, file2,null};
-        File[] files1 = {null, null,file};
-        String [] format = {"jpg","png","img"};
+        File[] files = {file, file1,  null};
+        File[] files1 = {null, null, file};
+        String[] format = {"jpg", "png", "img"};
         Controller controller = new Controller();
 
 
-        Storage storage = new Storage(123,files,format,"Uk",45);
+        Storage storage = new Storage(123, files, format, "Uk", 45);
 
-        Storage storage1 = new Storage(125,files1,format,"Uk",489);
-
+        Storage storage1 = new Storage(125, files1, format, "Uk", 489);
 
 
 //        controller.transferFile(storage,storage1,4);
@@ -34,9 +33,9 @@ public class Demo {
 //        System.out.println(Arrays.toString(storage.getFiles()));
 //        System.out.println(Arrays.toString(storage1.getFiles()));
 
-        controller.put(storage,file3);
+        controller.put(storage, file3);
+        controller.put(storage, file2);
         System.out.println(Arrays.toString(storage.getFiles()));
-
 
     }
 }

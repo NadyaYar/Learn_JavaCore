@@ -1,20 +1,23 @@
 package lesson19.companyX;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 public class Controller {
 
-    public void put(Storage storage, File file) {
+    public void put(Storage storage, File file) throws Exception {
         File[] files = storage.getFiles();
-
+        if (!isFormatSupport(storage, file.getFormat())) {
+            throw new Exception("Your format don`t support");
+        }
         for (int i = 0; i < files.length; i++) {
-            IsFormatSupport(storage,file);
             if (files[i] == null) {
                 files[i] = file;
                 break;
             }
         }
     }
+
 
     public void delete(Storage storage, File file) {
         File[] files = storage.getFiles();
@@ -26,47 +29,36 @@ public class Controller {
         }
     }
 
-    public void transferFile(Storage storageFrom, Storage storageTo, long id) {
+    public void transferFile(Storage storageFrom, Storage storageTo, long id) throws Exception {
         File[] files = storageFrom.getFiles();
-        for (int i = 0; i < files.length; i++) {
-            if (files[i].getId() == id) {
-                File file = files[i];
-                delete(storageFrom, file);
-                put(storageTo, file);
+        for (File value : files) {
+            if (value.getId() == id) {
+                delete(storageFrom, value);
+                put(storageTo, value);
             }
         }
     }
 
-    public void transferAll(Storage storageFrom, Storage storageTo) {
+    public void transferAll(Storage storageFrom, Storage storageTo) throws Exception {
         File[] files = storageFrom.getFiles();
-        for (int i = 0; i < files.length; i++) {
-            File file = files[i];
+        for (File file : files) {
             delete(storageFrom, file);
             put(storageTo, file);
         }
     }
 
-    private  void IsFormatSupport(Storage storage, File file) {
-        for (int i = 0; i < storage.getFormatSupports().length; i++) {
-            try {
-                Objects.equals(storage.getFormatSupports()[i], file.getFormat());
-            } catch (Exception e) {
-                System.out.println("Your file don`t support");
+    private boolean isFormatSupport(Storage storage, String fileFormat) {
+        boolean isFormatInStorage = false;
+        for (String formatSupport : storage.getFormatSupports()) {
+            if (formatSupport.equals(fileFormat)) {
+                isFormatInStorage = true;
+                break;
             }
         }
+        return isFormatInStorage;
     }
-
-//    private static void countSymbol(File file) {
-//        String name = file.getName();
-//        try {
-//            for (char symbol : name.toCharArray()) {
-//                        for (symbol = 0; symbol < name.toCharArray().length; symbol++){
-//                            boolean b = symbol > 10;
-//                        }
-//            }
-//        } catch () {
+//    private  boolean size(Storage storage, long fileSize){
 //
-//                }
-
-    }
+//    }
+}
 
