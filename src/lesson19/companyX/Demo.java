@@ -6,15 +6,15 @@ public class Demo {
     public static void main(String[] args) throws Exception {
 
 
-        File file = new File(4, "he", "ipg", 1223);
+        File file = new File(1, "he", "jpg", 11111111);
 
-        File file1 = new File(5, "hew", "ipg", 12213);
+        File file1 = new File(2, "hew", "jpg", 44444444);
 
-        File file2 = new File(6, "hes", "ipg", 12213);
+        File file2 = new File(3, "grt", "jpg", 4);
 
-        File file3 = new File(7, "hes1", "qwey", 12213);
+        File file3 = new File(7, "hes1", "qwey", 55);
 
-        File[] files = {file, file1,  null};
+        File[] files = {file, file1,  null, file3};
         File[] files1 = {null, null, file};
         String[] format = {"jpg", "png", "img"};
         Controller controller = new Controller();
@@ -33,8 +33,8 @@ public class Demo {
 //        System.out.println(Arrays.toString(storage.getFiles()));
 //        System.out.println(Arrays.toString(storage1.getFiles()));
 
-        controller.put(storage, file3);
         controller.put(storage, file2);
+
         System.out.println(Arrays.toString(storage.getFiles()));
 
     }
