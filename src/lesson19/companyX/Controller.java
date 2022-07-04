@@ -4,20 +4,17 @@ public class Controller {
 
     public void put(Storage storage, File file) throws Exception {
         File[] files = storage.getFiles();
-        if (!checkNull(storage, file)) {
-            throw new NullPointerException("Please, enter your data");
+        if (checkNull(storage, file)) {
+            throw new NullPointerException("You have null. Please, enter your data. Id of file with error: " + file.getId());
         }
-        if (!isFormatSupport(storage, file.getFormat())) {
-            throw new Exception("Your format don`t support");
+        if (isFormatSupport(storage, file.getFormat())) {
+            throw new Exception("Your format don`t support. Please, choose other format. Id of file with error: " + file.getId());
         }
-        if (!size(storage, file)) {
-            throw new Exception("You have not memory");
+        if (hasStorageMemory(storage, file)) {
+            throw new Exception("Check size of your file. You have not enough memory. Id of file with error: " + file.getId());
         }
-        if (!sameId(storage, file)) {
-            throw new Exception("You have file with same id");
-        }
-        if (!checkName(file)) {
-            throw new Exception("Your name is big. Please, enter a name of less than 10 symbols.");
+        if (!hasSameId(storage, file)) {
+            throw new Exception("You have file with same id. Please, choose other id. Id of file with error: " + file.getId());
         }
         for (int i = 0; i < files.length; i++) {
             if (files[i] == null) {
@@ -27,9 +24,11 @@ public class Controller {
         }
     }
 
-
-    public void delete(Storage storage, File file) {
+    public void delete(Storage storage, File file) throws NullPointerException {
         File[] files = storage.getFiles();
+        if (checkNull(storage, file)) {
+            throw new NullPointerException("Please, choose your file");
+        }
         for (int i = 0; i < files.length; i++) {
             if (files[i] == file) {
                 files[i] = null;
@@ -40,10 +39,22 @@ public class Controller {
 
     public void transferFile(Storage storageFrom, Storage storageTo, long id) throws Exception {
         File[] files = storageFrom.getFiles();
-        for (File value : files) {
-            if (value.getId() == id) {
-                delete(storageFrom, value);
-                put(storageTo, value);
+        for (File file : files) {
+            if (checkNull(storageFrom, file)) {
+                throw new NullPointerException("You have null. Please, enter your data" + file.getId());
+            }
+            if (isFormatSupport(storageTo, file.getFormat())) {
+                throw new Exception("Your format do not support" + file.getId());
+            }
+            if (hasStorageMemory(storageTo, file)) {
+                throw new Exception("You have not enough memory" + file.getId());
+            }
+            if (hasSameId(storageTo, file)) {
+                throw new Exception("You have file with same id" + file.getId());
+            }
+            if (file.getId() == id) {
+                delete(storageFrom, file);
+                put(storageTo, file);
             }
         }
     }
@@ -51,6 +62,18 @@ public class Controller {
     public void transferAll(Storage storageFrom, Storage storageTo) throws Exception {
         File[] files = storageFrom.getFiles();
         for (File file : files) {
+            if (checkNull(storageFrom, file)) {
+                throw new NullPointerException("You have null. Please, enter your data" + file.getId());
+            }
+            if (isFormatSupport(storageTo, file.getFormat())) {
+                throw new Exception("Your format do not support" + file.getId());
+            }
+            if (hasStorageMemory(storageTo, file)) {
+                throw new Exception("You have not enough memory" + file.getId());
+            }
+            if (hasSameId(storageTo, file)) {
+                throw new Exception("You have file with same id" + file.getId());
+            }
             delete(storageFrom, file);
             put(storageTo, file);
         }
@@ -64,48 +87,30 @@ public class Controller {
                 break;
             }
         }
-        return isFormatInStorage;
+        return !isFormatInStorage;
     }
 
-    private boolean size(Storage storage, File file) {
-        boolean isHasSize = false;
+    private boolean hasStorageMemory(Storage storage, File file) {
         File[] files = storage.getFiles();
+        long sizeFiles = 0;
         for (File file1 : files) {
             if (file1 != null) {
-                long sizeFiles = file1.getSize() + file.getSize();
-                if (storage.getStorageSize() > sizeFiles) {
-                    isHasSize = true;
-                    break;
-                }
+                sizeFiles += file1.getSize();
             }
         }
-        return isHasSize;
+        return storage.getStorageSize() > sizeFiles + file.getSize();
     }
 
-    private boolean sameId(Storage storage, File file) {
-        boolean isIdSame = false;
+
+    private boolean hasSameId(Storage storage, File file) {
         File[] files = storage.getFiles();
         for (File file1 : files) {
             if (file1 != null
                     && file1.getId() != file.getId()) {
-                isIdSame = true;
-                break;
+                return true;
             }
         }
-        return isIdSame;
-    }
-
-    private boolean checkName(File file) {
-        boolean isNameLarge = false;
-        String name = file.getName();
-        char[] array = name.toCharArray();
-        for (int i = 0; i < array.length; i++) {
-            if (array.length < 10) {
-                isNameLarge = true;
-                break;
-            }
-        }
-        return isNameLarge;
+        return false;
     }
 
     private boolean checkNull(Storage storage, File file) {
@@ -117,7 +122,7 @@ public class Controller {
                 && formatArray != null) {
             isNull = true;
         }
-        return isNull;
+        return !isNull;
     }
 }
 

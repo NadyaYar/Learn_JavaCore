@@ -6,9 +6,12 @@ public class File {
     private String format;
     private long size;
 
-    public File(long id, String name, String format, long size) {
-        this.id = id;
+    public File(long id, String name, String format, long size) throws Exception {
+        if (name.length() > 10) {
+            throw new Exception("Your name is big. Please, enter a name of less than 10 symbols.");
+        }
         this.name = name;
+        this.id = id;
         this.format = format;
         this.size = size;
     }
