@@ -4,18 +4,7 @@ public class Controller {
 
     public void put(Storage storage, File file) throws Exception {
         File[] files = storage.getFiles();
-        if (checkNull(storage, file)) {
-            throw new NullPointerException("You have null. Please, enter your data. Id of file with error: " + file.getId());
-        }
-        if (isFormatSupport(storage, file.getFormat())) {
-            throw new Exception("Your format don`t support. Please, choose other format. Id of file with error: " + file.getId());
-        }
-        if (hasStorageMemory(storage, file)) {
-            throw new Exception("Check size of your file. You have not enough memory. Id of file with error: " + file.getId());
-        }
-        if (!hasSameId(storage, file)) {
-            throw new Exception("You have file with same id. Please, choose other id. Id of file with error: " + file.getId());
-        }
+        validate(storage, file);
         for (int i = 0; i < files.length; i++) {
             if (files[i] == null) {
                 files[i] = file;
@@ -26,9 +15,6 @@ public class Controller {
 
     public void delete(Storage storage, File file) throws NullPointerException {
         File[] files = storage.getFiles();
-        if (checkNull(storage, file)) {
-            throw new NullPointerException("Please, choose your file");
-        }
         for (int i = 0; i < files.length; i++) {
             if (files[i] == file) {
                 files[i] = null;
@@ -40,46 +26,27 @@ public class Controller {
     public void transferFile(Storage storageFrom, Storage storageTo, long id) throws Exception {
         File[] files = storageFrom.getFiles();
         for (File file : files) {
-            if (checkNull(storageFrom, file)) {
-                throw new NullPointerException("You have null. Please, enter your data" + file.getId());
-            }
-            if (isFormatSupport(storageTo, file.getFormat())) {
-                throw new Exception("Your format do not support" + file.getId());
-            }
-            if (hasStorageMemory(storageTo, file)) {
-                throw new Exception("You have not enough memory" + file.getId());
-            }
-            if (hasSameId(storageTo, file)) {
-                throw new Exception("You have file with same id" + file.getId());
-            }
             if (file.getId() == id) {
                 delete(storageFrom, file);
                 put(storageTo, file);
             }
+            validate(storageTo, file);
         }
     }
 
     public void transferAll(Storage storageFrom, Storage storageTo) throws Exception {
         File[] files = storageFrom.getFiles();
         for (File file : files) {
-            if (checkNull(storageFrom, file)) {
-                throw new NullPointerException("You have null. Please, enter your data" + file.getId());
-            }
-            if (isFormatSupport(storageTo, file.getFormat())) {
-                throw new Exception("Your format do not support" + file.getId());
-            }
-            if (hasStorageMemory(storageTo, file)) {
-                throw new Exception("You have not enough memory" + file.getId());
-            }
-            if (hasSameId(storageTo, file)) {
-                throw new Exception("You have file with same id" + file.getId());
-            }
+            validate(storageTo, file);
+        }
+        for (File file : files) {
             delete(storageFrom, file);
             put(storageTo, file);
         }
     }
 
-    private boolean isFormatSupport(Storage storage, String fileFormat) {
+
+    private boolean isFormatNotSupport(Storage storage, String fileFormat) {
         boolean isFormatInStorage = false;
         for (String formatSupport : storage.getFormatSupports()) {
             if (formatSupport.equals(fileFormat)) {
@@ -90,7 +57,7 @@ public class Controller {
         return !isFormatInStorage;
     }
 
-    private boolean hasStorageMemory(Storage storage, File file) {
+    private boolean isStorageFull(Storage storage, File file) {
         File[] files = storage.getFiles();
         long sizeFiles = 0;
         for (File file1 : files) {
@@ -100,7 +67,6 @@ public class Controller {
         }
         return storage.getStorageSize() > sizeFiles + file.getSize();
     }
-
 
     private boolean hasSameId(Storage storage, File file) {
         File[] files = storage.getFiles();
@@ -113,16 +79,28 @@ public class Controller {
         return false;
     }
 
-    private boolean checkNull(Storage storage, File file) {
-        boolean isNull = false;
+    private boolean isNull(Storage storage, File file) {
         File[] files = storage.getFiles();
         String[] formatArray = storage.getFormatSupports();
-        if (files != null
+        return storage != null
+                && files != null
                 && file != null
-                && formatArray != null) {
-            isNull = true;
+                && formatArray != null;
+    }
+
+    private void validate(Storage storage, File file) throws Exception {
+        if (!isNull(storage, file)) {
+            throw new NullPointerException("You have null. Please, enter your data. Id of file with error: " + file.getId());
         }
-        return !isNull;
+        if (isFormatNotSupport(storage, file.getFormat())) {
+            throw new Exception("Your format don`t support. Please, choose other format. Id of file with error: " + file.getId());
+        }
+        if (!isStorageFull(storage, file)) {
+            throw new Exception("Check size of your file. You have not enough memory. Id of file with error: " + file.getId());
+        }
+        if (!hasSameId(storage, file)) {
+            throw new Exception("You have file with same id. Please, choose other id. Id of file with error: " + file.getId());
+        }
     }
 }
 

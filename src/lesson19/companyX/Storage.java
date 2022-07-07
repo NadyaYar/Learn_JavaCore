@@ -3,11 +3,11 @@ package lesson19.companyX;
 import java.util.Arrays;
 
 public class Storage {
-    long id;
-    File[] files;
-    String[] formatSupports;
-    String storageCountry;
-    long storageSize;
+  private   long id;
+  private   File[] files;
+  private   String[] formatSupports;
+  private   String storageCountry;
+  private   long storageSize;
 
     public Storage(long id, File[] files, String[] formatSupports, String storageCountry, long storageSize) {
         this.id = id;
