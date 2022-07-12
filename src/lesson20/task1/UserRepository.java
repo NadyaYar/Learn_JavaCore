@@ -1,4 +1,7 @@
-package Lesson9.user;
+package lesson20.task1;
+
+import lesson20.task1.exeption.BadRequestExeption;
+import lesson20.task1.exeption.UserNoFoundEx;
 
 public class UserRepository {
     private User[] users;
@@ -57,39 +60,39 @@ public class UserRepository {
         return null;
     }
 
-    public User findById(long id) {
+    public User findById(long id) throws UserNoFoundEx {
         for (User user : users) {
             if ((user != null) && (id == user.getId()))
                 return user;
         }
-        return null;
+        throw new UserNoFoundEx("User with id" + id + " no found");
     }
 
-    public User getUserBySessionId(String sessionId) {
+    public User getUserBySessionId(String sessionId) throws UserNoFoundEx{
         for (User user : users) {
             if ((user != null) && (sessionId == user.getSessionId()))
                 return user;
         }
-        return null;
+        throw new UserNoFoundEx("User with id" + sessionId + " no found");
     }
 
-    public Object save(User user1) {
+    public Object save(User user1) throws BadRequestExeption {
         for (int i = 0; i < users.length; i++) {
             if (users[i] == null) {
                 users[i] = user1;
                 return users[i];
             }
         }
-        return null;
+        throw new BadRequestExeption(" User with id: " + user1.getId() + "already exist");
     }
 
-    public User update(User user) {
+    public User update(User user) throws BadRequestExeption, UserNoFoundEx {
         for (int i = 0; i < users.length; i++) {
             if (user != null && users[i] == findById(user.getId()))
                 users[i] = user;
                 return users[i];
         }
-        return null;
+        throw  new BadRequestExeption(" User with id: " + user.getId() + "already exist");
     }
 
     public User[] delete(long id) {
