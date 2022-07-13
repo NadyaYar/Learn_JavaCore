@@ -1,8 +1,7 @@
 package lesson20.task2;
 
-import lesson20.task2.exception.BadRequestEx;
-import lesson20.task2.exception.InternalServerException;
-import lesson20.task2.exception.LimitExceeded;
+import lesson20.task2.exception.BadRequestException;
+import lesson20.task2.exception.LimitExceededException;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -18,17 +17,17 @@ public class TransactionDao {
     private final Utils utils = new Utils();
 
 
-    Transaction save(Transaction transaction) throws BadRequestEx, InternalServerException {
+    public Transaction save(Transaction transaction) throws BadRequestException {
         validate(transaction);
         return transaction;
     }
 
-    private void validate(Transaction transaction) throws BadRequestEx, InternalServerException {
+    private void validate(Transaction transaction) throws BadRequestException {
         if (transaction == null) {
             throw new NullPointerException("Please, choose your transaction");
         }
         if (transaction.getAmount() > utils.getLimitSimpleTransactionAmount())
-            throw new LimitExceeded("Transaction limit exceeded " + transaction.getId() + " . Cant be saved");
+            throw new LimitExceededException("Transaction limit exceeded " + transaction.getId() + " . Cant be saved");
 
         int sum = 0;
         int count = 0;
@@ -36,32 +35,26 @@ public class TransactionDao {
             sum += tr.getAmount();
             count++;
         }
-
         if (sum > utils.getLimitTransactionPerDayAmount()) {
-            throw new LimitExceeded("Transaction limit per day amount exceed " + transaction.getId() + " . Cant be saved");
+            throw new LimitExceededException("Transaction limit per day amount exceed " + transaction.getId() + " . Cant be saved");
         }
-
         if (count > utils.getLimitTransactionPerDayCount()) {
-            throw new LimitExceeded("Transaction limit per day count exceed " + transaction.getId() + " . Cant be saved");
+            throw new LimitExceededException("Transaction limit per day count exceed " + transaction.getId() + " . Cant be saved");
         }
-
         if (!isCityNoAccess(transaction)) {
-            throw new BadRequestEx("Your city not available " + transaction.getId() + " . Please, choose other city");
+            throw new BadRequestException("Your city not available " + transaction.getId() + " . Please, choose other city");
         }
-
         if (transactions.length > 10) {
-            throw new InternalServerException("You have enough memory. Cant be saved");
+            throw new BadRequestException("You have enough memory. Cant be saved");
         }
-
 
 
     }
 
-    Transaction[] transactionList() throws InternalServerException, BadRequestEx {
+    public Transaction[] transactionList() {
         Transaction[] result = new Transaction[resultCount()];
         int index = 0;
         for (Transaction transaction : transactions) {
-            validate(transaction);
             if (transaction != null) {
                 result[index] = transaction;
                 index++;
@@ -70,11 +63,10 @@ public class TransactionDao {
         return result;
     }
 
-    Transaction[] transactionList(String city) throws InternalServerException, BadRequestEx {
+    public Transaction[] transactionList(String city) {
         Transaction[] result = new Transaction[resultCountCity(city)];
         int index = 0;
         for (Transaction transaction : transactions) {
-            validate(transaction);
             if (transaction.getCity().equals(city)) {
                 result[index] = transaction;
                 index++;
@@ -83,11 +75,10 @@ public class TransactionDao {
         return result;
     }
 
-    Transaction[] transactionList(int amount) throws InternalServerException, BadRequestEx {
+    public Transaction[] transactionList(int amount) {
         Transaction[] result = new Transaction[resultCountAmount(amount)];
         int index = 0;
         for (Transaction transaction : transactions) {
-            validate(transaction);
             if (transaction.getAmount() == amount) {
                 result[index] = transaction;
                 index++;
@@ -102,20 +93,7 @@ public class TransactionDao {
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        int count = 0;
-        for (Transaction transaction : transactions) {
-            if (transaction != null) {
-                calendar.setTime(transaction.getDateCreated());
-                int trMonth = calendar.get(Calendar.MONTH);
-                int trDay = calendar.get(Calendar.DAY_OF_MONTH);
-
-                if (trMonth == month
-                        && trDay == day) {
-                    count++;
-                }
-            }
-        }
-        Transaction[] result = new Transaction[count];
+        Transaction[] result = new Transaction[countTransactionsPerDay(dateOfCurTransaction)];
         int index = 0;
         for (Transaction transaction : transactions) {
             if (transaction != null) {
@@ -145,10 +123,9 @@ public class TransactionDao {
         return isCityAvailable;
     }
 
-    private int resultCount() throws InternalServerException, BadRequestEx {
+    private int resultCount() {
         int count = 0;
         for (Transaction transaction : transactions) {
-            validate(transaction);
             if (transaction != null) {
                 count++;
             }
@@ -156,10 +133,9 @@ public class TransactionDao {
         return count;
     }
 
-    private int resultCountCity(String city) throws InternalServerException, BadRequestEx {
+    private int resultCountCity(String city) {
         int count = 0;
         for (Transaction transaction : transactions) {
-            validate(transaction);
             if (transaction.getCity().equals(city)) {
                 count++;
             }
@@ -167,12 +143,33 @@ public class TransactionDao {
         return count;
     }
 
-    private int resultCountAmount(int amount) throws InternalServerException, BadRequestEx {
+    private int resultCountAmount(int amount) {
         int count = 0;
         for (Transaction transaction : transactions) {
-            validate(transaction);
             if (transaction.getAmount() == amount) {
                 count++;
+            }
+        }
+        return count;
+    }
+
+    private int countTransactionsPerDay(Date dateOfCurTransaction) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(dateOfCurTransaction);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        int count = 0;
+        for (Transaction transaction : transactions) {
+            if (transaction != null) {
+                calendar.setTime(transaction.getDateCreated());
+                int trMonth = calendar.get(Calendar.MONTH);
+                int trDay = calendar.get(Calendar.DAY_OF_MONTH);
+
+                if (trMonth == month
+                        && trDay == day) {
+                    count++;
+                }
             }
         }
         return count;

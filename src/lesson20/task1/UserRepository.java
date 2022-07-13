@@ -1,7 +1,7 @@
 package lesson20.task1;
 
 import lesson20.task1.exeption.BadRequestExeption;
-import lesson20.task1.exeption.UserNoFoundEx;
+import lesson20.task1.exeption.UserNotFoundException;
 
 public class UserRepository {
     private User[] users;
@@ -54,29 +54,29 @@ public class UserRepository {
 
     public String getUserByName(String name) {
         for (User user : users) {
-            if ((user != null) && (name == user.getName()))
+            if ((user != null) && (name.equals(user.getName())))
                 return name;
         }
         return null;
     }
 
-    public User findById(long id) throws UserNoFoundEx {
+    public User findById(long id) throws UserNotFoundException {
         for (User user : users) {
             if ((user != null) && (id == user.getId()))
                 return user;
         }
-        throw new UserNoFoundEx("User with id" + id + " no found");
+        throw new UserNotFoundException("User with id" + id + " no found");
     }
 
-    public User getUserBySessionId(String sessionId) throws UserNoFoundEx{
+    public User getUserBySessionId(String sessionId) throws UserNotFoundException {
         for (User user : users) {
-            if ((user != null) && (sessionId == user.getSessionId()))
+            if ((user != null) && (sessionId.equals(user.getSessionId())))
                 return user;
         }
-        throw new UserNoFoundEx("User with id" + sessionId + " no found");
+        throw new UserNotFoundException("User with id" + sessionId + " no found");
     }
 
-    public Object save(User user1) throws BadRequestExeption {
+    public User save(User user1) throws BadRequestExeption {
         for (int i = 0; i < users.length; i++) {
             if (users[i] == null) {
                 users[i] = user1;
@@ -86,11 +86,12 @@ public class UserRepository {
         throw new BadRequestExeption(" User with id: " + user1.getId() + "already exist");
     }
 
-    public User update(User user) throws BadRequestExeption, UserNoFoundEx {
+    public User update(User user) throws BadRequestExeption, UserNotFoundException {
         for (int i = 0; i < users.length; i++) {
-            if (user != null && users[i] == findById(user.getId()))
+            if (user != null && users[i] == findById(user.getId())) {
                 users[i] = user;
                 return users[i];
+            }
         }
         throw  new BadRequestExeption(" User with id: " + user.getId() + "already exist");
     }
@@ -100,7 +101,6 @@ public class UserRepository {
         for (int i = 0; i < nElement; i++) {
             if ((users != null) && (id == users[i].getId()))
                 users[i] = null;
-
         }
         return users;
     }
