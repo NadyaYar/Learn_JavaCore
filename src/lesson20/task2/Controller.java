@@ -1,33 +1,26 @@
 package lesson20.task2;
 
 import lesson20.task2.exception.BadRequestException;
-import lesson20.task2.exception.InternalServerException;
 
 public class Controller {
 
-    private TransactionDao transactionDao;
+    public static Transaction save(Transaction transaction) throws BadRequestException{
 
-    public Controller(TransactionDao transactionDao) {
-        this.transactionDao = transactionDao;
+        return TransactionDao.save(transaction);
     }
 
-    public Transaction save(Transaction transaction) throws BadRequestException, InternalServerException {
+    public static Transaction[] transactionList() {
 
-        return transactionDao.save(transaction);
+        return TransactionDao.transactionList();
     }
 
-    public Transaction[] transactionList() throws InternalServerException, BadRequestException {
+    public static Transaction[] transactionList(String city) {
 
-        return transactionDao.transactionList();
+        return TransactionDao.transactionList(city);
     }
 
-    public Transaction[] transactionList(String city) throws InternalServerException, BadRequestException {
+    public static Transaction[] transactionList(int amount)  {
 
-        return transactionDao.transactionList(city);
-    }
-
-    public Transaction[] transactionList(int amount) throws InternalServerException, BadRequestException {
-
-        return transactionDao.transactionList(amount);
+        return TransactionDao.transactionList(amount);
     }
 }

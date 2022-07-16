@@ -1,5 +1,8 @@
 package Lesson15.betterUser.user;
 
+import lesson22.repository.User;
+import lesson22.repository.UserRepository;
+
 import java.util.Arrays;
 
 public class Demo {
@@ -11,7 +14,7 @@ public class Demo {
 
         User[] users = {user, user2, user1};
 
-        UserRepository userRepository = new UserRepository(users);
+        UserRepository userRepository = new UserRepository();
 
         userRepository.delete(3);
         System.out.println(Arrays.toString(userRepository.getUsers()));

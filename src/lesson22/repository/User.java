@@ -1,4 +1,4 @@
-package Lesson15.betterUser.user;
+package lesson22.repository;
 
 import java.util.Objects;
 

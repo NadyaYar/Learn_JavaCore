@@ -8,21 +8,17 @@ import java.util.Date;
 
 public class TransactionDao {
 
-    public Transaction[] transactions;
+    public static Transaction[] transactions = new Transaction[10];
 
-    public TransactionDao(Transaction[] transactions) {
-        this.transactions = transactions;
-    }
-
-    private final Utils utils = new Utils();
+    private static final Utils utils = new Utils();
 
 
-    public Transaction save(Transaction transaction) throws BadRequestException {
+    public static Transaction save(Transaction transaction) throws BadRequestException {
         validate(transaction);
         return transaction;
     }
 
-    private void validate(Transaction transaction) throws BadRequestException {
+    private static void validate(Transaction transaction) throws BadRequestException {
         if (transaction == null) {
             throw new NullPointerException("Please, choose your transaction");
         }
@@ -47,11 +43,9 @@ public class TransactionDao {
         if (transactions.length > 10) {
             throw new BadRequestException("You have enough memory. Cant be saved");
         }
-
-
     }
 
-    public Transaction[] transactionList() {
+    public static Transaction[] transactionList() {
         Transaction[] result = new Transaction[resultCount()];
         int index = 0;
         for (Transaction transaction : transactions) {
@@ -63,7 +57,7 @@ public class TransactionDao {
         return result;
     }
 
-    public Transaction[] transactionList(String city) {
+    public static Transaction[] transactionList(String city) {
         Transaction[] result = new Transaction[resultCountCity(city)];
         int index = 0;
         for (Transaction transaction : transactions) {
@@ -75,7 +69,7 @@ public class TransactionDao {
         return result;
     }
 
-    public Transaction[] transactionList(int amount) {
+    public static Transaction[] transactionList(int amount) {
         Transaction[] result = new Transaction[resultCountAmount(amount)];
         int index = 0;
         for (Transaction transaction : transactions) {
@@ -87,7 +81,7 @@ public class TransactionDao {
         return result;
     }
 
-    private Transaction[] getTransactionsPerDay(Date dateOfCurTransaction) {
+    private  static Transaction[] getTransactionsPerDay(Date dateOfCurTransaction) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(dateOfCurTransaction);
         int month = calendar.get(Calendar.MONTH);
@@ -111,7 +105,7 @@ public class TransactionDao {
         return result;
     }
 
-    private boolean isCityNoAccess(Transaction transaction) {
+    private static boolean isCityNoAccess(Transaction transaction) {
         String[] cities = utils.getCities();
         boolean isCityAvailable = false;
         for (String city : cities) {
@@ -123,7 +117,7 @@ public class TransactionDao {
         return isCityAvailable;
     }
 
-    private int resultCount() {
+    private static int resultCount() {
         int count = 0;
         for (Transaction transaction : transactions) {
             if (transaction != null) {
@@ -133,7 +127,7 @@ public class TransactionDao {
         return count;
     }
 
-    private int resultCountCity(String city) {
+    private  static int resultCountCity(String city) {
         int count = 0;
         for (Transaction transaction : transactions) {
             if (transaction.getCity().equals(city)) {
@@ -143,7 +137,7 @@ public class TransactionDao {
         return count;
     }
 
-    private int resultCountAmount(int amount) {
+    private static int resultCountAmount(int amount) {
         int count = 0;
         for (Transaction transaction : transactions) {
             if (transaction.getAmount() == amount) {
@@ -153,7 +147,7 @@ public class TransactionDao {
         return count;
     }
 
-    private int countTransactionsPerDay(Date dateOfCurTransaction) {
+    private  static int countTransactionsPerDay(Date dateOfCurTransaction) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(dateOfCurTransaction);
         int month = calendar.get(Calendar.MONTH);

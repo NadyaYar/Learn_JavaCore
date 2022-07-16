@@ -1,17 +1,13 @@
-package Lesson15.betterUser.user;
+package lesson22.repository;
 
 public class UserRepository {
-    private User[] users;
+    private static User[] users;
 
-    public UserRepository(User[] users) {
-        this.users = users;
-    }
-
-    public User[] getUsers() {
+    public static User[] getUsers() {
         return users;
     }
 
-    public int countUser() {
+    public static int countUser() {
         int countUser = 0;
         for (User user : users) {
             if (user != null) {
@@ -21,7 +17,7 @@ public class UserRepository {
         return countUser;
     }
 
-    public String[] getUserNames() {
+    public static String[] getUserNames() {
         String[] namesArray = new String[countUser()];
         int index = 0;
         for (User user : users) {
@@ -33,7 +29,7 @@ public class UserRepository {
         return namesArray;
     }
 
-    public long[] getUserIds() {
+    public static long[] getUserIds() {
         long[] idArray = new long[countUser()];
         int index = 0;
         for (User user : users) {
@@ -45,43 +41,48 @@ public class UserRepository {
         return idArray;
     }
 
-    public String getUserNameByUserIds(long id) {
+    public static String getUserNameByUserIds(long id) {
         for (User user : users) {
-            if ((user != null) && (user.getId() == id))
+            if ((user != null) && (user.getId() == id)) {
                 return user.getName();
+            }
         }
         return null;
     }
 
-    public String getUserByName(String name) {
+    public static String getUserByName(String name) {
         for (User user : users) {
-            if ((user != null) && (user.getName().equals(name)))
+            if ((user != null) && (user.getName().equals(name))) {
                 return name;
+            }
         }
         return null;
     }
 
-    public User findById(long id) {
+    public static User findById(long id) {
         for (User user : users) {
-            if ((user != null) && (id == user.getId()))
+            if ((user != null) && (id == user.getId())) {
                 return user;
+            }
         }
         return null;
     }
 
-    public User getUserBySessionId(String sessionId) {
+    public static User getUserBySessionId(String sessionId) {
         for (User user : users) {
-            if ((user != null) && (user.getSessionId().equals(sessionId)))
+            if ((user != null) && (user.getSessionId().equals(sessionId))) {
                 return user;
+            }
         }
         return null;
     }
 
-    public Object save(User user1) {
+    public static User save(User user1) {
         if (user1 == null
                 || findById(user1.getId()) != null
-                || isStorageFull())
+                || isStorageFull()) {
             return null;
+        }
         for (int i = 0; i < users.length; i++) {
             if (users[i] == null) {
                 users[i] = user1;
@@ -91,7 +92,7 @@ public class UserRepository {
         return null;
     }
 
-    public User update(User user) {
+    public static User update(User user) {
         if (user == null
                 || findById(user.getId()) != null) return null;
         for (int i = 0; i < users.length; i++) {
@@ -102,7 +103,7 @@ public class UserRepository {
         return null;
     }
 
-    public void delete(long id) {
+    public static void delete(long id) {
         for (int i = 0; i < users.length; i++) {
             if ((users[i] != null)
                     && id == users[i].getId()) {
@@ -112,7 +113,7 @@ public class UserRepository {
         }
     }
 
-    public boolean isStorageFull() {
+    public static boolean isStorageFull() {
         for (User user : users) {
             if (user != null) return false;
         }
