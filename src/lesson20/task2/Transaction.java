@@ -2,8 +2,22 @@ package lesson20.task2;
 
 import java.util.Date;
 
-public record Transaction(long id, String city, int amount, String description,
-                          TransactionType type, Date dateCreated) {
+public class Transaction {
+    private long id;
+    private String city;
+    private int amount;
+    private String description;
+    private TransactionType type;
+    private Date dateCreated;
+
+    public Transaction(long id, String city, int amount, String description, TransactionType type, Date dateCreated) {
+        this.id = id;
+        this.city = city;
+        this.amount = amount;
+        this.description = description;
+        this.type = type;
+        this.dateCreated = dateCreated;
+    }
 
     public long getId() {
         return id;

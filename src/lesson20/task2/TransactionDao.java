@@ -12,7 +12,6 @@ public class TransactionDao {
 
     private static final Utils utils = new Utils();
 
-
     public static Transaction save(Transaction transaction) throws BadRequestException {
         validate(transaction);
         return transaction;
@@ -46,6 +45,11 @@ public class TransactionDao {
     }
 
     public static Transaction[] transactionList() {
+        for (Transaction transaction : transactions) {
+            if (transaction == null) {
+                return transactions;
+            }
+        }
         Transaction[] result = new Transaction[resultCount()];
         int index = 0;
         for (Transaction transaction : transactions) {
@@ -58,6 +62,11 @@ public class TransactionDao {
     }
 
     public static Transaction[] transactionList(String city) {
+        for (Transaction transaction : transactions) {
+            if (transaction == null) {
+                return transactions;
+            }
+        }
         Transaction[] result = new Transaction[resultCountCity(city)];
         int index = 0;
         for (Transaction transaction : transactions) {
@@ -70,6 +79,11 @@ public class TransactionDao {
     }
 
     public static Transaction[] transactionList(int amount) {
+        for (Transaction transaction : transactions) {
+            if (transaction == null) {
+                return transactions;
+            }
+        }
         Transaction[] result = new Transaction[resultCountAmount(amount)];
         int index = 0;
         for (Transaction transaction : transactions) {
@@ -81,7 +95,7 @@ public class TransactionDao {
         return result;
     }
 
-    private  static Transaction[] getTransactionsPerDay(Date dateOfCurTransaction) {
+    private static Transaction[] getTransactionsPerDay(Date dateOfCurTransaction) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(dateOfCurTransaction);
         int month = calendar.get(Calendar.MONTH);
@@ -127,7 +141,7 @@ public class TransactionDao {
         return count;
     }
 
-    private  static int resultCountCity(String city) {
+    private static int resultCountCity(String city) {
         int count = 0;
         for (Transaction transaction : transactions) {
             if (transaction.getCity().equals(city)) {
@@ -147,7 +161,7 @@ public class TransactionDao {
         return count;
     }
 
-    private  static int countTransactionsPerDay(Date dateOfCurTransaction) {
+    private static int countTransactionsPerDay(Date dateOfCurTransaction) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(dateOfCurTransaction);
         int month = calendar.get(Calendar.MONTH);
