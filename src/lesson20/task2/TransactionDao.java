@@ -14,6 +14,12 @@ public class TransactionDao {
 
     public static Transaction save(Transaction transaction) throws BadRequestException {
         validate(transaction);
+        for (int i = 0; i < transactions.length; i++) {
+            if (transactions[i] == null) {
+                transactions[i] = transaction;
+                break;
+            }
+        }
         return transaction;
     }
 
@@ -45,10 +51,8 @@ public class TransactionDao {
     }
 
     public static Transaction[] transactionList() {
-        for (Transaction transaction : transactions) {
-            if (transaction == null) {
-                return transactions;
-            }
+        if (resultCount() == 0) {
+            return transactions;
         }
         Transaction[] result = new Transaction[resultCount()];
         int index = 0;
@@ -70,9 +74,11 @@ public class TransactionDao {
         Transaction[] result = new Transaction[resultCountCity(city)];
         int index = 0;
         for (Transaction transaction : transactions) {
-            if (transaction.getCity().equals(city)) {
-                result[index] = transaction;
-                index++;
+            if (city != null) {
+                if (transaction.getCity().equals(city)) {
+                    result[index] = transaction;
+                    index++;
+                }
             }
         }
         return result;
