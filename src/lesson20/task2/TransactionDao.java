@@ -87,7 +87,7 @@ public class TransactionDao {
     public static Transaction[] transactionList(int amount) {
         for (Transaction transaction : transactions) {
             if (transaction == null) {
-                return transactions;
+                return new Transaction[]{};
             }
         }
         Transaction[] result = new Transaction[resultCountAmount(amount)];
