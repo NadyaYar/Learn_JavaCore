@@ -52,7 +52,7 @@ public class TransactionDao {
 
     public static Transaction[] transactionList() {
         if (resultCount() == 0) {
-            return transactions;
+            return new Transaction[]{};
         }
         Transaction[] result = new Transaction[resultCount()];
         int index = 0;
@@ -66,34 +66,30 @@ public class TransactionDao {
     }
 
     public static Transaction[] transactionList(String city) {
-        for (Transaction transaction : transactions) {
-            if (transaction == null) {
-                return transactions;
-            }
+        if (resultCount() == 0) {
+            return new Transaction[]{};
         }
         Transaction[] result = new Transaction[resultCountCity(city)];
         int index = 0;
         for (Transaction transaction : transactions) {
-            if (city != null) {
-                if (transaction.getCity().equals(city)) {
-                    result[index] = transaction;
-                    index++;
-                }
+            if (transaction != null
+                    && transaction.getCity().equals(city)) {
+                result[index] = transaction;
+                index++;
             }
         }
         return result;
     }
 
     public static Transaction[] transactionList(int amount) {
-        for (Transaction transaction : transactions) {
-            if (transaction == null) {
-                return new Transaction[]{};
-            }
+        if (resultCount() == 0) {
+            return new Transaction[]{};
         }
         Transaction[] result = new Transaction[resultCountAmount(amount)];
         int index = 0;
         for (Transaction transaction : transactions) {
-            if (transaction.getAmount() == amount) {
+            if (transaction != null
+                    && transaction.getAmount() == amount) {
                 result[index] = transaction;
                 index++;
             }
