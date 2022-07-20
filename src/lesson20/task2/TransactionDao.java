@@ -55,7 +55,7 @@ public class TransactionDao {
         if (resultLength == 0) {
             return new Transaction[]{};
         }
-        Transaction[] result = new Transaction[resultCount()];
+        Transaction[] result = new Transaction[resultLength];
         int index = 0;
         for (Transaction transaction : transactions) {
             if (transaction != null) {
@@ -71,7 +71,7 @@ public class TransactionDao {
         if (resultLengthCity == 0) {
             return new Transaction[]{};
         }
-        Transaction[] result = new Transaction[resultCountCity(city)];
+        Transaction[] result = new Transaction[resultLengthCity];
         int index = 0;
         for (Transaction transaction : transactions) {
             if (transaction != null
@@ -88,7 +88,7 @@ public class TransactionDao {
         if (resultLengthAmount == 0) {
             return new Transaction[]{};
         }
-        Transaction[] result = new Transaction[resultCountAmount(amount)];
+        Transaction[] result = new Transaction[resultLengthAmount];
         int index = 0;
         for (Transaction transaction : transactions) {
             if (transaction != null
