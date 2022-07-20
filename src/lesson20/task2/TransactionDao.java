@@ -51,7 +51,8 @@ public class TransactionDao {
     }
 
     public static Transaction[] transactionList() {
-        if (resultCount() == 0) {
+       int  resultLength = resultCount();
+        if (resultLength == 0) {
             return new Transaction[]{};
         }
         Transaction[] result = new Transaction[resultCount()];
@@ -66,7 +67,8 @@ public class TransactionDao {
     }
 
     public static Transaction[] transactionList(String city) {
-        if (resultCount() == 0) {
+        int resultLengthCity = resultCountCity(city);
+        if (resultLengthCity == 0) {
             return new Transaction[]{};
         }
         Transaction[] result = new Transaction[resultCountCity(city)];
@@ -82,7 +84,8 @@ public class TransactionDao {
     }
 
     public static Transaction[] transactionList(int amount) {
-        if (resultCount() == 0) {
+        int resultLengthAmount = resultCountAmount(amount);
+        if (resultLengthAmount == 0) {
             return new Transaction[]{};
         }
         Transaction[] result = new Transaction[resultCountAmount(amount)];
