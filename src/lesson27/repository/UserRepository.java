@@ -26,22 +26,22 @@ public class UserRepository {
         return ids;
     }
 
-    public static String getUserNameByUserIds(long id) {
+    public static String getUserNameByUserIds(long id) throws UserNotFoundException {
         for (User user : arrayList) {
             if ((user.getId() == id)) {
                 return user.getName();
             }
         }
-        return null;
+        throw new UserNotFoundException("User with id : " + " no found");
     }
 
-    public static String getUserByName(String name) {
+    public static String getUserByName(String name) throws UserNotFoundException {
         for (User user : arrayList) {
             if ((user.getName().equals(name))) {
                 return name;
             }
         }
-        return null;
+        throw new UserNotFoundException("User no found");
     }
 
     public static User findById(long id) throws UserNotFoundException {
@@ -62,14 +62,15 @@ public class UserRepository {
         throw new UserNotFoundException("User with id" + sessionId + " no found");
     }
 
-//    public User1 update(User1 user) {
-//        for (int i = 0; i < users.length; i++) {
-//            if (user != null && users[i] == findById(user.getId())) {
-//                users[i] = user;
-//                return users[i];
-//            }
-//        }
-//    }
+    public static User update(User user) throws UserNotFoundException, BadRequestExeption {
+        for (User user1 : arrayList) {
+            if (user1 == findById(user.getId())) {
+                user1 = user;
+                return user1;
+            }
+        }
+        throw new BadRequestExeption(" User with id: " + user.getId() + "already exist");
+    }
 
     public static void save(User user1) {
         arrayList.add(user1);

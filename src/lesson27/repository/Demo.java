@@ -33,5 +33,7 @@ public class Demo {
         UserRepository.delete(user1);
         System.out.println(UserRepository.arrayList);
 
+        System.out.println(UserRepository.update(user2));
+
     }
 }
