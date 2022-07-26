@@ -5,6 +5,10 @@ import java.util.Arrays;
 
 public class ArrayListTest {
 
+    private static final ArrayList<Order> orderArrayList = new ArrayList<>();
+
+    private static final ArrayList<Order> orderArrayList1 = new ArrayList<>();
+
     public static void main(String[] args) {
 
         Order order = new Order(12, 45, "some", "something", "el");
@@ -58,17 +62,10 @@ public class ArrayListTest {
         System.out.println(useList());
     }
 
-    private static final ArrayList<Order> orderArrayList = new ArrayList<>();
-
-    private static final ArrayList<Order> orderArrayList1 = new ArrayList<>();
-
     public static ArrayList<Order> useList() {
-        for (Order order : orderArrayList) {
-            if (order == null
-                    && orderArrayList.size() > 5) {
+        if (orderArrayList.size() > 5) {
                 return null;
             }
-        }
         return orderArrayList;
     }
 }

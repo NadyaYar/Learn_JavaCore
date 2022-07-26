@@ -1,9 +1,11 @@
-package lesson20.task1;
+package lesson27.repository;
+
+import java.util.Objects;
 
 public class User {
     private long id;
-    private String name;
-    private String sessionId;
+    private final String name;
+    private final String sessionId;
 
     public User(long id, String name, String sessionId) {
         this.id = id;
@@ -13,15 +15,6 @@ public class User {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public String setName(String name) {
-        this.name = name;
-        return name;
-    }
-
-    public void setSessionId(String sessionId) {
-        this.sessionId = sessionId;
     }
 
     @Override
@@ -43,5 +36,18 @@ public class User {
 
     public String getSessionId() {
         return sessionId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return id == user.id && name.equals(user.name) && sessionId.equals(user.sessionId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, sessionId);
     }
 }
