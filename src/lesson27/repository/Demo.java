@@ -30,8 +30,8 @@ public class Demo {
 //
 //        System.out.println(UserRepository.getUserBySessionId("er12"));
 
-        UserRepository.delete(user3);
-        System.out.println(UserRepository.users);
+
+        System.out.println(UserRepository.delete(user3));
 
 //        System.out.println(UserRepository.update(user2));
 

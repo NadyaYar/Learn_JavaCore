@@ -72,24 +72,26 @@ public class UserRepository {
         throw new UserNotFoundException(" User with id: " + user.getId() + "no found");
     }
 
-    public static ArrayList<User> save(User user1) throws BadRequestExeption {
-        if(!validate(user1)) {
-            users.add(user1);
-            return users;
+    public static ArrayList<User> save(User user) throws BadRequestExeption {
+        for (User user1 : users) {
+            if (!user1.equals(user)
+                    && user1.hashCode() != user.hashCode()) {
+                users.add(user);
+                return users;
+            }
         }
-       throw new BadRequestExeption(" User with id: " + user1.getId() + "already exist");
+        throw new BadRequestExeption(" User with id: " + user.getId() + "already exist");
     }
 
     public static ArrayList<User> delete(User user) throws UserNotFoundException {
-        if (validate(user)) {
-            users.remove(user);
-            return users;
+        for (User user1 : users) {
+            if (user1.equals(user)
+                    && user1.hashCode() == user.hashCode()) {
+                users.remove(user);
+                return users;
+            }
         }
         throw new UserNotFoundException(" User with id: " + user.getId() + "no found");
-    }
-
-    public static boolean validate(User user) {
-        return users.contains(user);
     }
 }
 
