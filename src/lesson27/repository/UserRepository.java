@@ -7,11 +7,11 @@ import java.util.ArrayList;
 
 public class UserRepository {
 
-    public static ArrayList<User> arrayList = new ArrayList<>();
+    public static ArrayList<User> users = new ArrayList<>();
 
     public static ArrayList<String> getUserNames() {
         ArrayList<String> names = new ArrayList<>();
-        for (User user : arrayList) {
+        for (User user : users) {
             String name = user.getName();
             names.add(name);
         }
@@ -20,32 +20,32 @@ public class UserRepository {
 
     public static ArrayList<Long> getUserIds() {
         ArrayList<Long> ids = new ArrayList<>();
-        for (User user : arrayList) {
+        for (User user : users) {
             ids.add(user.getId());
         }
         return ids;
     }
 
     public static String getUserNameByUserIds(long id) throws UserNotFoundException {
-        for (User user : arrayList) {
+        for (User user : users) {
             if ((user.getId() == id)) {
                 return user.getName();
             }
         }
-        throw new UserNotFoundException("User with id : " + " no found");
+        throw new UserNotFoundException("User with id : " + id + " no found");
     }
 
     public static String getUserByName(String name) throws UserNotFoundException {
-        for (User user : arrayList) {
+        for (User user : users) {
             if ((user.getName().equals(name))) {
                 return name;
             }
         }
-        throw new UserNotFoundException("User no found");
+        throw new UserNotFoundException("User with name: " + name + " no found");
     }
 
     public static User findById(long id) throws UserNotFoundException {
-        for (User user : arrayList) {
+        for (User user : users) {
             if ((id == user.getId())) {
                 return user;
             }
@@ -54,7 +54,7 @@ public class UserRepository {
     }
 
     public static User getUserBySessionId(String sessionId) throws UserNotFoundException {
-        for (User user : arrayList) {
+        for (User user : users) {
             if ((user.getSessionId().equals(sessionId))) {
                 return user;
             }
@@ -62,22 +62,34 @@ public class UserRepository {
         throw new UserNotFoundException("User with id" + sessionId + " no found");
     }
 
-    public static User update(User user) throws UserNotFoundException, BadRequestExeption {
-        for (User user1 : arrayList) {
+    public static User update(User user) throws UserNotFoundException {
+        for (User user1 : users) {
             if (user1 == findById(user.getId())) {
                 user1 = user;
                 return user1;
             }
         }
-        throw new BadRequestExeption(" User with id: " + user.getId() + "already exist");
+        throw new UserNotFoundException(" User with id: " + user.getId() + "no found");
     }
 
-    public static void save(User user1) {
-        arrayList.add(user1);
+    public static ArrayList<User> save(User user1) throws BadRequestExeption {
+        if(!validate(user1)) {
+            users.add(user1);
+            return users;
+        }
+       throw new BadRequestExeption(" User with id: " + user1.getId() + "already exist");
     }
 
-    public static void delete(User user) {
-        arrayList.remove(user);
+    public static ArrayList<User> delete(User user) throws UserNotFoundException {
+        if (validate(user)) {
+            users.remove(user);
+            return users;
+        }
+        throw new UserNotFoundException(" User with id: " + user.getId() + "no found");
+    }
+
+    public static boolean validate(User user) {
+        return users.contains(user);
     }
 }
 
