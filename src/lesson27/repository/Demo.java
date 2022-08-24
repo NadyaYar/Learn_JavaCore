@@ -13,8 +13,11 @@ public class Demo {
         User user3 = new User(14, "Olya", "er14");
 
         UserRepository.save(user1);
+//        UserRepository.save(user1);
+
         UserRepository.save(user2);
         UserRepository.save(user3);
+        UserRepository.update(user2);
 
 //        System.out.println(UserRepository.users);
 //

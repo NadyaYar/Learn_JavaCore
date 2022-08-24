@@ -7,19 +7,15 @@ import java.util.GregorianCalendar;
 
 public class DemoDataCreatedComparator {
     public static void main(String[] args) {
-        Calendar calendar = new GregorianCalendar(2012, 2, 23);
-        Calendar calendar1 = new GregorianCalendar(2011, 2, 6);
-        Calendar calendar2 = new GregorianCalendar(2022, 5, 12);
+        Calendar calendar = new GregorianCalendar(2012, Calendar.MARCH, 23);
+        Calendar calendar1 = new GregorianCalendar(2011, Calendar.MARCH, 6);
+        Calendar calendar2 = new GregorianCalendar(2022, Calendar.JUNE, 12);
 
-        Date date = calendar.getTime();
-        Date date1 = calendar1.getTime();
-        Date date2 = calendar2.getTime();
+        Capability capability1 = new Capability(1, "a", "a", true, calendar.getTime());
 
-        Capability capability1 = new Capability(1, "a", "a", true, date);
+        Capability capability2 = new Capability(2, "a", "a", true, calendar1.getTime());
 
-        Capability capability2 = new Capability(2, "a", "a", true, date1);
-
-        Capability capability3 = new Capability(3, "a", "a", true, date2);
+        Capability capability3 = new Capability(3, "a", "a", true, calendar2.getTime());
 
         ArrayList<Capability> capabilities = new ArrayList<>();
 
